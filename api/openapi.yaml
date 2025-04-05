@@ -1,0 +1,398 @@
+openapi: 3.0.3
+info:
+  title: Messenger API
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080
+    description: Dev server
+tags:
+  - name: user
+    description: Operations with users
+  - name: chats
+    description: Working with chats
+  - name: messages
+    description: Managing messages
+paths:
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: Register a new user
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_register_body"
+        required: true
+      responses:
+        "200":
+          description: Successful registration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  username:
+                    type: string
+        "400":
+          description: Invalid input
+      x-swagger-router-controller: User
+
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Logs user into the system
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user_login_body"
+        required: true
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                      username:
+                        type: string
+        "400":
+          description: Invalid username/password supplied
+      x-swagger-router-controller: User
+
+  /user/logout:
+    post:
+      tags:
+        - user
+      summary: Logs out
+      operationId: logoutUser
+      responses:
+        default:
+          description: Successful operation
+      x-swagger-router-controller: User
+
+  /chats:
+    get:
+      tags:
+        - chats
+      summary: Get user chat list
+      operationId: chatsGET
+      parameters:
+        - name: limit
+          in: query
+          description: The number of chats
+          required: false
+          schema:
+            type: integer
+            example: 10
+      responses:
+        "200":
+          description: List of user chats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Chat"
+        "401":
+          description: Unauthorized
+      x-swagger-router-controller: Chats
+
+    post:
+      tags:
+        - chats
+      summary: Create a new chat
+      operationId: createChat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/chats_body"
+        required: true
+      responses:
+        "201":
+          description: Chat created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+        "400":
+          description: Invalid input
+      x-swagger-router-controller: Chats
+
+  /chats/{chatId}/participants:
+    post:
+      tags:
+        - chats
+      summary: Add a user to the chat
+      operationId: addParticipant
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/chatId_participants_body"
+        required: true
+      responses:
+        "200":
+          description: User added successfully
+        "400":
+          description: Invalid input
+        "404":
+          description: Chat not found
+      x-swagger-router-controller: Chats
+
+    delete:
+      tags:
+        - chats
+      summary: Remove a user from the chat
+      operationId: removeParticipant
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: User removed successfully
+        "404":
+          description: Chat or user not found
+      x-swagger-router-controller: Chats
+
+  /users/{userId}/chats:
+    get:
+      tags:
+        - chats
+      summary: Get chats for specific user
+      operationId: getUserChats
+      parameters:
+        - name: limit
+          in: query
+          description: The number of chats to return
+          required: false
+          schema:
+            type: integer
+            example: 10
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of user's chats
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Chat"
+        "404":
+          description: User not found
+      x-swagger-router-controller: Chats
+
+  /chats/{chatId}/messages:
+    get:
+      tags:
+        - messages
+      summary: Get messages from a chat
+      operationId: getMessages
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Message"
+        "404":
+          description: Chat not found
+      x-swagger-router-controller: Messages
+
+    post:
+      tags:
+        - messages
+      summary: Send a message in a chat
+      operationId: sendMessage
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/chatId_messages_body"
+        required: true
+      responses:
+        "201":
+          description: Message sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "400":
+          description: Invalid input
+        "404":
+          description: Chat not found
+      x-swagger-router-controller: Messages
+
+  /chats/{chatId}/messages/{messageId}:
+    delete:
+      tags:
+        - messages
+      summary: Delete a message
+      operationId: deleteMessage
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: messageId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Message deleted successfully
+        "404":
+          description: Message not found
+      x-swagger-router-controller: Messages
+
+components:
+  schemas:
+    Chat:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "5df75824-7801-48ff-8769-178eb178a0fc"
+        name:
+          type: string
+          example: "Work Chat"
+        lastMessage:
+          type: string
+          example: "See you tomorrow!"
+        createdAt:
+          type: string
+          format: date-time
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"
+        chatId:
+          type: string
+          format: uuid
+          example: "5df75824-7801-48ff-8769-178eb178a0fc"
+        senderId:
+          type: string
+          format: uuid
+          example: "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"
+        text:
+          type: string
+          example: "Hello, world!"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2024-02-22T12:34:56Z"
+
+    user_register_body:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "newuser"
+        password:
+          type: string
+          example: "securepassword123"
+
+    user_login_body:
+      type: object
+      properties:
+        username:
+          type: string
+          example: "existinguser"
+        password:
+          type: string
+          example: "userpassword123"
+
+    chats_body:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Team Chat"
+        userId:
+          type: string
+          format: uuid
+          example: "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"
+
+    chatId_participants_body:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+          example: "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f"
+
+    chatId_messages_body:
+      type: object
+      properties:
+        content:
+          type: string
+          example: "Hello, team!"

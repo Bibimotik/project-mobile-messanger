@@ -1,0 +1,99 @@
+version: '3.8'
+
+networks:
+  app_net:
+    driver: bridge
+
+services:
+  app1:
+    networks:
+      - app_net
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: node_app1
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: mysecretpassword
+      DATABASE_NAME: mydatabase
+      APP_PORT: 8080
+      JWT_SECRET: "460497564ebd6fa22aef662aa4f90405069bc8a3ce2e233d8a0109bf9f6e64737febac185b1e1d3d3e0020fd945f832cdd0a731dfe56ad25f773cdead2e49924"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app
+
+  app2:
+    networks:
+      - app_net
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: node_app2
+    ports:
+      - "8081:8080"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: mysecretpassword
+      DATABASE_NAME: mydatabase
+      APP_PORT: 8080
+      JWT_SECRET: "460497564ebd6fa22aef662aa4f90405069bc8a3ce2e233d8a0109bf9f6e64737febac185b1e1d3d3e0020fd945f832cdd0a731dfe56ad25f773cdead2e49924"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/usr/src/app
+
+  db:
+    networks:
+      - app_net
+    image: postgres:16
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: mydatabase
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  haproxy:
+    networks:
+      - app_net
+    image: haproxy
+    ports:
+      - "8000:6000"
+    user: "root"
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      app1:
+        condition: service_started
+      app2:
+        condition: service_started
+
+volumes:
+  postgres_data:
