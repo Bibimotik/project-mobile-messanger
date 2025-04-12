@@ -1,0 +1,2 @@
+/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/1k6m4r2o/x86_64/CMakeFiles/edit_cache.dir
+/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/1k6m4r2o/x86_64/CMakeFiles/rebuild_cache.dir
