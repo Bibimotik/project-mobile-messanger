@@ -1,0 +1,5 @@
+/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja \
+  -C \
+  /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86_64 \
+  native-lib \
+  password_hash

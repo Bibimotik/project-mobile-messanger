@@ -1,0 +1,50 @@
+{
+  "buildFiles": [
+    "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/CMakeLists.txt",
+    "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "native-lib::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "native-lib",
+      "output": "/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86_64/libnative-lib.so",
+      "runtimeFiles": [
+        "/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86_64/libpassword_hash.so"
+      ]
+    },
+    "password_hash::@722a890e66085ab2a789": {
+      "toolchain": "toolchain",
+      "abi": "x86_64",
+      "artifactName": "password_hash",
+      "output": "/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86_64/libpassword_hash.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

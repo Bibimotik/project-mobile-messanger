@@ -1,0 +1,10 @@
+# ninja log v5
+3	177	1745043877622578189	src/main/cpp/hash/CMakeFiles/password_hash.dir/hash.c.o	3560cc5fe2225c96
+177	276	1745043877719891224	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86/libpassword_hash.so	b84a033bcf5677fe
+3	490	1745044016903070462	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	f35968b3ed5fc9b5
+491	586	1745044017000792600	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86/libnative-lib.so	3371fbcf920efe57
+3	121	1745044125784261943	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86/libnative-lib.so	d6b311dd53339190
+4	219	1745046047625355456	src/main/cpp/hash/CMakeFiles/password_hash.dir/hash.c.o	3560cc5fe2225c96
+220	323	1745046047721216653	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86/libpassword_hash.so	b84a033bcf5677fe
+3	597	1745046047997163284	CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o	f35968b3ed5fc9b5
+597	713	1745046048113832236	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/x86/libnative-lib.so	d6b311dd53339190

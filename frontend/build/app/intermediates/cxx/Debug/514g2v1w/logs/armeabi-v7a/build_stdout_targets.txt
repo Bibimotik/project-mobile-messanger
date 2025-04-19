@@ -1,0 +1,12 @@
+ninja: Entering directory `/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/armeabi-v7a'
+[1/4] Building C object src/main/cpp/hash/CMakeFiles/password_hash.dir/hash.c.o
+/Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash/hash.c:150:47: warning: unused parameter 'output_len' [-Wunused-parameter]
+  150 |                       uint8_t* output, size_t output_len) {
+      |                                               ^
+/Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash/hash.c:140:13: warning: unused function 'generate_salt' [-Wunused-function]
+  140 | static void generate_salt(uint8_t* salt, size_t salt_len) {
+      |             ^~~~~~~~~~~~~
+2 warnings generated.
+[2/4] Linking C shared library /Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/armeabi-v7a/libpassword_hash.so
+[3/4] Building CXX object CMakeFiles/native-lib.dir/src/main/cpp/native-lib.cpp.o
+[4/4] Linking CXX shared library /Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/514g2v1w/obj/armeabi-v7a/libnative-lib.so

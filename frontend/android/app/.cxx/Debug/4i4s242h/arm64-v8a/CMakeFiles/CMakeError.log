@@ -1,0 +1,90 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_113d2 && [1/2] Building C object CMakeFiles/cmTC_113d2.dir/CMakeCCompilerABI.c.o
+Android (12027248, +pgo, -bolt, +lto, -mlgo, based on r522817) clang version 18.0.1 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+Target: aarch64-none-linux-android21
+Thread model: posix
+InstalledDir: /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin
+ (in-process)
+ "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android21 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp -resource-dir /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_113d2.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_113d2.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -internal-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/include -internal-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/local/include -internal-externc-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/include -internal-externc-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -target-feature -fmv -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_113d2.dir/CMakeCCompilerABI.c.o -x c /Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompilerABI.c
+clang -cc1 version 18.0.1 based upon LLVM 18.0.1 default target x86_64-apple-darwin23.2.0
+ignoring nonexistent directory "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/local/include"
+ignoring nonexistent directory "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/include
+ /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/aarch64-linux-android
+ /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include
+End of search list.
+[2/2] Linking C executable cmTC_113d2
+FAILED: cmTC_113d2 
+: && /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android21 --sysroot=/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments   -v CMakeFiles/cmTC_113d2.dir/CMakeCCompilerABI.c.o -o cmTC_113d2   && :
+Android (12027248, +pgo, -bolt, +lto, -mlgo, based on r522817) clang version 18.0.1 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+Target: aarch64-none-linux-android21
+Thread model: posix
+InstalledDir: /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin
+ "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/ld.lld" --sysroot=/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=both --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_113d2 /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/crtbegin_dynamic.o -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/lib/linux/aarch64 -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21 -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_113d2.dir/CMakeCCompilerABI.c.o /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/crtend_android.o
+ld.lld: error: cannot open CMakeFiles/cmTC_113d2.dir/CMakeCCompilerABI.c.o: No such file or directory
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+
+
+
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_d755b && [1/2] Building C object CMakeFiles/cmTC_d755b.dir/CMakeCCompilerABI.c.o
+Android (12027248, +pgo, -bolt, +lto, -mlgo, based on r522817) clang version 18.0.1 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+Target: aarch64-none-linux-android21
+Thread model: posix
+InstalledDir: /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin
+ (in-process)
+ "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang" -cc1 -triple aarch64-none-linux-android21 -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -pic-is-pie -mframe-pointer=non-leaf -ffp-contract=on -fno-rounding-math -mconstructor-aliases -funwind-tables=2 -target-cpu generic -target-feature +neon -target-feature +v8a -target-feature +fix-cortex-a53-835769 -target-abi aapcs -debug-info-kind=constructor -dwarf-version=4 -debugger-tuning=gdb -fdebug-compilation-dir=/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp -v -ffunction-sections -fdata-sections -fcoverage-compilation-dir=/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp -resource-dir /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18 -dependency-file CMakeFiles/cmTC_d755b.dir/CMakeCCompilerABI.c.o.d -MT CMakeFiles/cmTC_d755b.dir/CMakeCCompilerABI.c.o -sys-header-deps -D ANDROID -D _FORTIFY_SOURCE=2 -isysroot /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -internal-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/include -internal-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/local/include -internal-externc-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/aarch64-linux-android -internal-externc-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/include -internal-externc-isystem /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include -Wformat -ferror-limit 19 -femulated-tls -stack-protector 2 -fno-signed-char -fgnuc-version=4.2.1 -target-feature +outline-atomics -target-feature -fmv -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_d755b.dir/CMakeCCompilerABI.c.o -x c /Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompilerABI.c
+clang -cc1 version 18.0.1 based upon LLVM 18.0.1 default target x86_64-apple-darwin23.2.0
+ignoring nonexistent directory "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/local/include"
+ignoring nonexistent directory "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/include
+ /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/aarch64-linux-android
+ /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include
+End of search list.
+[2/2] Linking C executable cmTC_d755b
+Android (12027248, +pgo, -bolt, +lto, -mlgo, based on r522817) clang version 18.0.1 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+Target: aarch64-none-linux-android21
+Thread model: posix
+InstalledDir: /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin
+ "/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/ld.lld" --sysroot=/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -EL --fix-cortex-a53-843419 -z now -z relro -z max-page-size=4096 --hash-style=both --eh-frame-hdr -m aarch64linux -pie -dynamic-linker /system/bin/linker64 -o cmTC_d755b /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/crtbegin_dynamic.o -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/lib/linux/aarch64 -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21 -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android -L/Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib --build-id=sha1 --no-rosegment --no-undefined-version --fatal-warnings --no-undefined CMakeFiles/cmTC_d755b.dir/CMakeCCompilerABI.c.o /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl -lc /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/lib/clang/18/lib/linux/libclang_rt.builtins-aarch64-android.a -l:libunwind.a -ldl /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/crtend_android.o
+
+
+Cannot copy output executable
+  ''
+to destination specified by COPY_FILE:
+  '/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/3.22.1-g37088a8/CMakeDetermineCompilerABI_C.bin'
+Unable to find the executable at any of:
+  /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp/cmTC_d755b
+  /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp/Debug/cmTC_d755b
+  /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp/Debug/cmTC_d755b.app/cmTC_d755b
+  /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp/cmTC_d755b.app/cmTC_d755b
+  /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp/Development/cmTC_d755b
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/4i4s242h/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_abc92 && [1/2] Building C object CMakeFiles/cmTC_abc92.dir/testCCompiler.c.o
+[2/2] Linking C executable cmTC_abc92
+FAILED: cmTC_abc92 
+: && /Users/polinalazareva/Library/Android/sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--no-undefined-version -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments CMakeFiles/cmTC_abc92.dir/testCCompiler.c.o -o cmTC_abc92  -latomic -lm && :
+ld64.lld: error: unknown argument '--build-id=sha1'
+ld64.lld: error: unknown argument '--no-rosegment'
+ld64.lld: error: unknown argument '--no-undefined-version'
+ld64.lld: error: unknown argument '--fatal-warnings'
+ld64.lld: error: unknown argument '--no-undefined'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+ninja: build stopped: subcommand failed.
+
+
+

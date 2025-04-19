@@ -1,10 +1,8 @@
 'use strict';
 
 const db = require('../db/db');
-const bcrypt = require('bcryptjs');
 const { sign } = require("jsonwebtoken");
 const { v4: uuidv4 } = require('uuid');
-const saltRounds = 10;
 const jwtSecret = process.env.JWT_SECRET;
 
 async function initDB() {
@@ -35,17 +33,30 @@ exports.registerUser = async function(body) {
   }
 
   try {
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    // Используем хешированный пароль напрямую, так как он уже хеширован на клиенте
     const userId = uuidv4();
 
     const result = await db.query(
         'INSERT INTO users (id, username, password) VALUES ($1, $2, $3) RETURNING id, username',
-        [userId, username, hashedPassword]
+        [userId, username, password]
+    );
+
+    // Генерируем JWT токен
+    const token = sign(
+        {
+          userId: result.rows[0].id,
+          username: result.rows[0].username
+        },
+        jwtSecret,
+        { expiresIn: '24h' }
     );
 
     return {
-      id: result.rows[0].id,
-      username: result.rows[0].username
+      token,
+      user: {
+        id: result.rows[0].id,
+        username: result.rows[0].username
+      }
     };
 
   } catch (err) {
@@ -76,8 +87,8 @@ exports.loginUser = async function(body) {
 
     const user = userResult.rows[0];
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
+    // Просто сравниваем хеши напрямую, так как они уже в одинаковом формате
+    if (password !== user.password) {
       throw { status: 401, message: 'Invalid credentials' };
     }
 

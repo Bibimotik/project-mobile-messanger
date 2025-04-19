@@ -1,3 +1,0 @@
-﻿     Создается библиотека E:\Учеба\6_семестр\БПОМС\hash\x64\Debug\hash.lib и объект E:\Учеба\6_семестр\БПОМС\hash\x64\Debug\hash.exp
-MSVCRTD.lib(exe_main.obj) : error LNK2019: ссылка на неразрешенный внешний символ main в функции "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ).
-E:\Учеба\6_семестр\БПОМС\hash\x64\Debug\hash.exe : fatal error LNK1120: неразрешенных внешних элементов: 1

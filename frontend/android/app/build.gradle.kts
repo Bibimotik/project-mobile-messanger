@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.mobile_messanger"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -28,6 +28,13 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        externalNativeBuild {
+            cmake {
+                cppFlags("-std=c++11")
+                arguments("-DANDROID_STL=c++_shared")
+            }
+        }
     }
 
     buildTypes {
@@ -36,6 +43,19 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path("CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
+
+    // Добавляем настройки для ресурсов
+    aaptOptions {
+        noCompress("xml")
+        ignoreAssetsPattern = "!values-*:!values-watch-*"
     }
 }
 
