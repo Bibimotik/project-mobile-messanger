@@ -1,2 +1,0 @@
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/CMakeLists.txt
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash/CMakeLists.txt

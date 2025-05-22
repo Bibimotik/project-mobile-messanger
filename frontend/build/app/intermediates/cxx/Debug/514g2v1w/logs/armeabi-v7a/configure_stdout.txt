@@ -1,4 +1,0 @@
-Not searching for unused variables given on the command line.
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/armeabi-v7a

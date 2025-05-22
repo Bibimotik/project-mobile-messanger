@@ -1,6 +1,0 @@
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86/CMakeFiles/native-lib.dir
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86/CMakeFiles/edit_cache.dir
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86/CMakeFiles/rebuild_cache.dir
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86/src/main/cpp/hash/CMakeFiles/password_hash.dir
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86/src/main/cpp/hash/CMakeFiles/edit_cache.dir
-/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/514g2v1w/x86/src/main/cpp/hash/CMakeFiles/rebuild_cache.dir
