@@ -43,7 +43,6 @@ exports.sendMessage = function(body, chatId, userId) {
       );
 
       resolve({
-        status: 201,
         message: 'Message sent successfully',
         data: result.rows[0]
       });
@@ -120,7 +119,7 @@ exports.deleteMessage = function(chatId, messageId, userId) {
           [messageId]
       );
 
-      resolve({ status: 200, message: 'Message deleted successfully' });
+      resolve({ message: 'Message deleted successfully' });
     } catch (err) {
       reject({ status: 500, message: err.message });
     }
@@ -163,7 +162,6 @@ exports.editMessage = function(chatId, messageId, userId, newContent) {
       );
 
       resolve({
-        status: 200,
         message: 'Message updated successfully',
         data: result.rows[0]
       });

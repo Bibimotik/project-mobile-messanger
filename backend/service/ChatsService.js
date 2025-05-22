@@ -127,7 +127,7 @@ exports.addParticipant = function(body, chatId) {
           [chatId, userId]
       );
 
-      resolve({ status: 200, message: 'Participant added successfully' });
+      resolve({ message: 'Participant added successfully' });
     } catch (err) {
       reject({ status: 500, message: err.message });
     }
@@ -160,25 +160,54 @@ exports.chatsGET = function(limit) {
   });
 }
 
-exports.removeParticipant = function(chatId, userId) {
+exports.removeParticipant = function(chatId, userId, currentUserId) {
   return new Promise(async function(resolve, reject) {
     try {
-      const participantExists = await db.query(
-          'SELECT id FROM chat_participants WHERE chat_id = $1 AND user_id = $2',
-          [chatId, userId]
-      );
-
-      if (participantExists.rows.length === 0) {
-        reject({ status: 404, message: 'Participant not found in this chat' });
+      if (!isValidUUID(chatId) || !isValidUUID(userId) || !isValidUUID(currentUserId)) {
+        reject({ status: 400, message: 'Invalid ID format' });
         return;
       }
 
-      await db.query(
-          'DELETE FROM chat_participants WHERE chat_id = $1 AND user_id = $2',
-          [chatId, userId]
+      // Check if chat exists
+      const chatExists = await db.query(
+        'SELECT id FROM chats WHERE id = $1',
+        [chatId]
       );
 
-      resolve({ status: 200, message: 'Participant removed successfully' });
+      if (chatExists.rows.length === 0) {
+        reject({ status: 404, message: 'Chat not found' });
+        return;
+      }
+
+      // Check if current user is a participant
+      const isCurrentUserParticipant = await db.query(
+        'SELECT id FROM chat_participants WHERE chat_id = $1 AND user_id = $2',
+        [chatId, currentUserId]
+      );
+
+      if (isCurrentUserParticipant.rows.length === 0) {
+        reject({ status: 403, message: 'Current user is not a participant of this chat' });
+        return;
+      }
+
+      // Check if target user is a participant
+      const isTargetUserParticipant = await db.query(
+        'SELECT id FROM chat_participants WHERE chat_id = $1 AND user_id = $2',
+        [chatId, userId]
+      );
+
+      if (isTargetUserParticipant.rows.length === 0) {
+        reject({ status: 404, message: 'Target user is not a participant of this chat' });
+        return;
+      }
+
+      // Remove the participant
+      await db.query(
+        'DELETE FROM chat_participants WHERE chat_id = $1 AND user_id = $2',
+        [chatId, userId]
+      );
+
+      resolve({ message: 'Participant removed successfully' });
     } catch (err) {
       reject({ status: 500, message: err.message });
     }
@@ -222,3 +251,98 @@ exports.getUserChats = function(userId, limit) {
     }
   });
 }
+
+exports.deleteChat = function(chatId, userId) {
+  return new Promise(async function(resolve, reject) {
+    try {
+      if (!isValidUUID(chatId) || !isValidUUID(userId)) {
+        reject({ status: 400, message: 'Invalid ID format' });
+        return;
+      }
+
+      // Проверяем, является ли пользователь участником чата
+      const isParticipant = await db.query(
+        'SELECT id FROM chat_participants WHERE chat_id = $1 AND user_id = $2',
+        [chatId, userId]
+      );
+
+      if (isParticipant.rows.length === 0) {
+        reject({ status: 403, message: 'User is not a participant of this chat' });
+        return;
+      }
+
+      // Начинаем транзакцию
+      await db.query('BEGIN');
+
+      // Удаляем все сообщения чата
+      await db.query('DELETE FROM messages WHERE chat_id = $1', [chatId]);
+
+      // Удаляем всех участников чата
+      await db.query('DELETE FROM chat_participants WHERE chat_id = $1', [chatId]);
+
+      // Удаляем сам чат
+      await db.query('DELETE FROM chats WHERE id = $1', [chatId]);
+
+      // Завершаем транзакцию
+      await db.query('COMMIT');
+
+      resolve({ message: 'Chat deleted successfully' });
+    } catch (err) {
+      await db.query('ROLLBACK');
+      reject({ status: 500, message: err.message });
+    }
+  });
+};
+
+module.exports.editChat = function(chatId, userId, updateData) {
+  return new Promise(function(resolve, reject) {
+    // Проверяем, является ли пользователь владельцем чата
+    db.query(
+      'SELECT * FROM chats WHERE id = ? AND user_id = ?',
+      [chatId, userId],
+      function(error, results) {
+        if (error) {
+          reject({ status: 500, message: 'Database error', error: error });
+          return;
+        }
+
+        if (results.length === 0) {
+          reject({ status: 403, message: 'You are not authorized to edit this chat' });
+          return;
+        }
+
+        // Обновляем данные чата
+        const allowedFields = ['name', 'description', 'avatar_url'];
+        const updates = [];
+        const values = [];
+
+        for (const field of allowedFields) {
+          if (updateData[field] !== undefined) {
+            updates.push(`${field} = ?`);
+            values.push(updateData[field]);
+          }
+        }
+
+        if (updates.length === 0) {
+          reject({ status: 400, message: 'No valid fields to update' });
+          return;
+        }
+
+        values.push(chatId);
+
+        db.query(
+          `UPDATE chats SET ${updates.join(', ')} WHERE id = ?`,
+          values,
+          function(error, results) {
+            if (error) {
+              reject({ status: 500, message: 'Database error', error: error });
+              return;
+            }
+
+            resolve({ status: 200, message: 'Chat updated successfully' });
+          }
+        );
+      }
+    );
+  });
+};

@@ -139,6 +139,8 @@ paths:
         "400":
           description: Invalid input
       x-swagger-router-controller: Chats
+      security:
+        - bearerAuth: []
 
   /chats/{chatId}/participants:
     post:
@@ -192,6 +194,8 @@ paths:
         "404":
           description: Chat or user not found
       x-swagger-router-controller: Chats
+      security:
+        - bearerAuth: []
 
   /users/{userId}/chats:
     get:
@@ -284,6 +288,52 @@ paths:
       x-swagger-router-controller: Messages
 
   /chats/{chatId}/messages/{messageId}:
+    patch:
+      tags:
+        - messages
+      summary: Edit a message
+      operationId: editMessage
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: messageId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "Updated message content"
+              required:
+                - content
+      responses:
+        "200":
+          description: Message updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+        "400":
+          description: Invalid input
+        "403":
+          description: User doesn't have permission to edit this message
+        "404":
+          description: Message not found
+      x-swagger-router-controller: Messages
+      security:
+        - bearerAuth: [ ]
+
     delete:
       tags:
         - messages
@@ -305,9 +355,80 @@ paths:
       responses:
         "200":
           description: Message deleted successfully
+        "403":
+          description: User doesn't have permission to delete this message
         "404":
           description: Message not found
       x-swagger-router-controller: Messages
+      security:
+        - bearerAuth: [ ]
+
+  /chats/{chatId}:
+    patch:
+      tags:
+        - chats
+      summary: Update chat information
+      operationId: updateChat
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Updated Chat Name"
+              required:
+                - name
+      responses:
+        "200":
+          description: Chat updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Chat"
+        "400":
+          description: Invalid input
+        "403":
+          description: User doesn't have permission to edit this chat
+        "404":
+          description: Chat not found
+      x-swagger-router-controller: Chats
+      security:
+        - bearerAuth: [ ]
+
+    delete:
+      tags:
+        - chats
+      summary: Delete a chat
+      operationId: deleteChat
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Chat deleted successfully
+        "400":
+          description: Invalid chat ID
+        "403":
+          description: User is not a participant of this chat
+        "404":
+          description: Chat not found
+      x-swagger-router-controller: Chats
+      security:
+        - bearerAuth: []
+
 
 components:
   schemas:
@@ -381,6 +502,8 @@ components:
           type: string
           format: uuid
           example: "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"
+      required:
+        - name
 
     chatId_participants_body:
       type: object
@@ -396,3 +519,9 @@ components:
         content:
           type: string
           example: "Hello, team!"
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

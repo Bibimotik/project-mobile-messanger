@@ -3,6 +3,22 @@
 var utils = require('../utils/writer.js');
 var Chats = require('../service/ChatsService');
 
+const jwt = require('jsonwebtoken');
+
+function getUserIdFromToken(req, res) {
+    try {
+        const token = req.headers.authorization?.split(' ')[1];
+        if (!token) throw new Error('No token');
+        const user = jwt.verify(token, process.env.JWT_SECRET);
+        console.log('JWT payload:', user);
+        return user.id || user.userId;
+    } catch (e) {
+        console.error('Token verification error:', e);
+        utils.writeJson(res, { message: 'User is not authenticated or token is invalid', error: e.message, headers: req.headers }, 401);
+        return null;
+    }
+}
+
 module.exports.addParticipant = function addParticipant (req, res, next, body, chatId) {
   Chats.addParticipant(body, chatId)
     .then(function (response) {
@@ -24,7 +40,10 @@ module.exports.chatsGET = function chatsGET (req, res, next, limit) {
 };
 
 module.exports.createChat = function createChat (req, res, next, body) {
-  Chats.createChat(body)
+  const userId = getUserIdFromToken(req, res);
+  if (!userId) return;
+  const newBody = { ...body, userId };
+  Chats.createChat(newBody)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -34,7 +53,10 @@ module.exports.createChat = function createChat (req, res, next, body) {
 };
 
 module.exports.removeParticipant = function removeParticipant (req, res, next, chatId, userId) {
-  Chats.removeParticipant(chatId, userId)
+  const currentUserId = getUserIdFromToken(req, res);
+  if (!currentUserId) return;
+
+  Chats.removeParticipant(userId, chatId, currentUserId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -58,4 +80,29 @@ module.exports.getUserChats = function(req, res, next, limit, userId) {
         .catch(function (response) {
             utils.writeJson(res, response);
         });
+};
+
+module.exports.deleteChat = function deleteChat(req, res, next, chatId) {
+  const userId = getUserIdFromToken(req, res);
+  if (!userId) return;
+  Chats.deleteChat(chatId, userId)
+    .then(function(response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function(response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.editChat = function editChat(req, res, next, body, chatId) {
+  const userId = getUserIdFromToken(req, res);
+  if (!userId) return;
+  
+  Chats.editChat(chatId, userId, body)
+    .then(function(response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function(response) {
+      utils.writeJson(res, response);
+    });
 };
