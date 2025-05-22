@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9f9dd5a9-3f80-404b-b18b-8928a3a5f772",
+		"_postman_id": "85204259-4fdd-43e7-bdac-ec4ba78717dc",
 		"name": "пупупу",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "43734805",
-		"_collection_link": "https://cloudy-shuttle-3637723.postman.co/workspace/%25D0%25B4's-Workspace~d3be2ebd-e928-4302-834f-cc17336ef7e3/collection/43734805-9f9dd5a9-3f80-404b-b18b-8928a3a5f772?action=share&source=collection_link&creator=43734805"
+		"_exporter_id": "40943232"
 	},
 	"item": [
 		{
@@ -17,7 +16,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"bibimotik1\",\r\n  \"password\": \"222\"\r\n}",
+					"raw": "{\r\n  \"username\": \"bibimotik\",\r\n  \"password\": \"222\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,83 +71,20 @@
 			"response": []
 		},
 		{
-			"name": "создать чат",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"Новый групповой чат\",\r\n  \"userId\": \"77133cd2-4a36-477a-902a-03d03ca492e6\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/chats",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"chats"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "добавить участника в чат",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"userId\": \"06ceea7a-d8f1-43b1-b0b8-2bc8615797d6\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/chats/57c85473-96d9-4a38-bb7d-56b8d8993adc/participants",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"chats",
-						"57c85473-96d9-4a38-bb7d-56b8d8993adc",
-						"participants"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "получить все чаты",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYWY0ZmE0NC0xZDQwLTQ3ZjktODc3MS0wZjk3MWJkY2MwMzYiLCJ1c2VybmFtZSI6ImJpYmltb3RpayIsImlhdCI6MTc0NzkxODg0MSwiZXhwIjoxNzQ4MDA1MjQxfQ.W_jseQgXf0QTRVo-j73E12j0MLoz-VGcdsoRQOGZ6mo",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
@@ -201,6 +137,253 @@
 							"key": "limit",
 							"value": "10"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "создать чат",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYWY0ZmE0NC0xZDQwLTQ3ZjktODc3MS0wZjk3MWJkY2MwMzYiLCJ1c2VybmFtZSI6ImJpYmltb3RpayIsImlhdCI6MTc0NzkxODg0MSwiZXhwIjoxNzQ4MDA1MjQxfQ.W_jseQgXf0QTRVo-j73E12j0MLoz-VGcdsoRQOGZ6mo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Новый групповой чат\"\r\n  //\"userId\": \"77133cd2-4a36-477a-902a-03d03ca492e6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/chats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"chats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "добавить участника в чат",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"1ef426a1-1c79-470d-b5f5-ce5ff39a4124\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/chats/37907b18-3eb9-492a-bce3-b5ee1bc0f4ed/participants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"chats",
+						"37907b18-3eb9-492a-bce3-b5ee1bc0f4ed",
+						"participants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "удалить участника из чата",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYWY0ZmE0NC0xZDQwLTQ3ZjktODc3MS0wZjk3MWJkY2MwMzYiLCJ1c2VybmFtZSI6ImJpYmltb3RpayIsImlhdCI6MTc0NzkyMjQxNSwiZXhwIjoxNzQ4MDA4ODE1fQ.MFciYDcVoKfm4JfWdZhzoX8q-1n5GNt4RbnzsISL2n0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/chats/37907b18-3eb9-492a-bce3-b5ee1bc0f4ed/participants?userId=1ef426a1-1c79-470d-b5f5-ce5ff39a4124",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"chats",
+						"37907b18-3eb9-492a-bce3-b5ee1bc0f4ed",
+						"participants"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1ef426a1-1c79-470d-b5f5-ce5ff39a4124"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "удалить чат",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYWY0ZmE0NC0xZDQwLTQ3ZjktODc3MS0wZjk3MWJkY2MwMzYiLCJ1c2VybmFtZSI6ImJpYmltb3RpayIsImlhdCI6MTc0NzkxODg0MSwiZXhwIjoxNzQ4MDA1MjQxfQ.W_jseQgXf0QTRVo-j73E12j0MLoz-VGcdsoRQOGZ6mo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/chats/adc2092f-1ffb-426c-8407-4ba103ba6c8e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"chats",
+						"adc2092f-1ffb-426c-8407-4ba103ba6c8e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "получить сообщения чата",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYWY0ZmE0NC0xZDQwLTQ3ZjktODc3MS0wZjk3MWJkY2MwMzYiLCJ1c2VybmFtZSI6ImJpYmltb3RpayIsImlhdCI6MTc0NzkxODg0MSwiZXhwIjoxNzQ4MDA1MjQxfQ.W_jseQgXf0QTRVo-j73E12j0MLoz-VGcdsoRQOGZ6mo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/chats/37907b18-3eb9-492a-bce3-b5ee1bc0f4ed/messages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"chats",
+						"37907b18-3eb9-492a-bce3-b5ee1bc0f4ed",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "отправить сообщение",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxZWY0MjZhMS0xYzc5LTQ3MGQtYjVmNS1jZTVmZjM5YTQxMjQiLCJ1c2VybmFtZSI6ImJpYmltb3RpazEiLCJpYXQiOjE3NDc5MjA5MDcsImV4cCI6MTc0ODAwNzMwN30.xxhQfnqkVKgd3WTaUhftO7E76SQBSaExtwM9juu7rZo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    //\"userId\": \"3af4fa44-1d40-47f9-8771-0f971bdcc036\",\r\n    \"content\": \"Новый Текст сообщения\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/chats/37907b18-3eb9-492a-bce3-b5ee1bc0f4ed/messages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"chats",
+						"37907b18-3eb9-492a-bce3-b5ee1bc0f4ed",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "удалить сообщение",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzYWY0ZmE0NC0xZDQwLTQ3ZjktODc3MS0wZjk3MWJkY2MwMzYiLCJ1c2VybmFtZSI6ImJpYmltb3RpayIsImlhdCI6MTc0NzkxODg0MSwiZXhwIjoxNzQ4MDA1MjQxfQ.W_jseQgXf0QTRVo-j73E12j0MLoz-VGcdsoRQOGZ6mo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/chats/57c85473-96d9-4a38-bb7d-56b8d8993adc/messages/{messageId}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"chats",
+						"57c85473-96d9-4a38-bb7d-56b8d8993adc",
+						"messages",
+						"{messageId}"
 					]
 				}
 			},
