@@ -346,3 +346,44 @@ module.exports.editChat = function(chatId, userId, updateData) {
     );
   });
 };
+
+exports.getChatParticipants = function(chatId) {
+  return new Promise(async function(resolve, reject) {
+    try {
+      if (!isValidUUID(chatId)) {
+        reject({ status: 400, message: 'Invalid chat ID format' });
+        return;
+      }
+
+      // Проверяем существование чата
+      const chatExists = await db.query(
+        'SELECT id FROM chats WHERE id = $1',
+        [chatId]
+      );
+
+      if (chatExists.rows.length === 0) {
+        reject({ status: 404, message: 'Chat not found' });
+        return;
+      }
+
+      // Получаем список участников
+      const result = await db.query(
+        `SELECT u.id, u.username 
+         FROM users u
+         JOIN chat_participants cp ON u.id = cp.user_id
+         WHERE cp.chat_id = $1
+         ORDER BY u.username`,
+        [chatId]
+      );
+
+      resolve(result.rows);
+    } catch (err) {
+      console.error('Database error:', err);
+      reject({
+        status: 500,
+        message: 'Database operation failed',
+        detail: err.message
+      });
+    }
+  });
+};

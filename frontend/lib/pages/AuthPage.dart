@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_messanger/services/auth_service.dart';
+import 'package:mobile_messanger/services/chat_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'HomePage.dart';
 import 'RegisterPage.dart';
@@ -35,20 +36,27 @@ class _AuthPageState extends State<AuthPage> {
         _passwordController.text,
       );
 
+      // Загружаем чаты пользователя
+      final chats = await ChatService.getUserChats();
+
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('token', response['token']);
       await prefs.setString('userId', response['user']['id']);
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Welcome ${response['user']['username']}!'),
+          content: Text('Добро пожаловать ${response['user']['username']}!'),
           backgroundColor: Colors.green,
         ),
       );
 
+      if (!mounted) return;
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HomePage()),
+        MaterialPageRoute(
+          builder: (_) => HomePage(initialChats: chats),
+        ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

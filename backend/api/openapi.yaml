@@ -87,6 +87,49 @@ paths:
           description: Successful operation
       x-swagger-router-controller: User
 
+  /user/search:
+    get:
+      tags:
+        - user
+      summary: Search users by name
+      operationId: searchUsers
+      parameters:
+        - name: name
+          in: query
+          description: Name to search for
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of users to return
+          required: false
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: List of users matching the search criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    username:
+                      type: string
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized
+      x-swagger-router-controller: User
+      security:
+        - bearerAuth: []
+
   /chats:
     get:
       tags:
@@ -170,6 +213,41 @@ paths:
           description: Chat not found
       x-swagger-router-controller: Chats
 
+    get:
+      tags:
+        - chats
+      summary: Get all participants of the chat
+      operationId: getChatParticipants
+      parameters:
+        - name: chatId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: List of chat participants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                    username:
+                      type: string
+        "400":
+          description: Invalid chat ID
+        "404":
+          description: Chat not found
+      x-swagger-router-controller: Chats
+      security:
+        - bearerAuth: []
+
     delete:
       tags:
         - chats
@@ -243,6 +321,7 @@ paths:
           schema:
             type: string
             format: uuid
+          description: ID of the chat to get messages from
       responses:
         "200":
           description: List of messages
@@ -252,9 +331,17 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Message"
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized
+        "403":
+          description: Access denied
         "404":
           description: Chat not found
       x-swagger-router-controller: Messages
+      security:
+        - bearerAuth: []
 
     post:
       tags:

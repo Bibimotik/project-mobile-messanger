@@ -82,6 +82,16 @@ module.exports.getUserChats = function(req, res, next, limit, userId) {
         });
 };
 
+module.exports.getChatParticipants = function(req, res, next, chatId) {
+    Chats.getChatParticipants(chatId)
+        .then(function(response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function(response) {
+            utils.writeJson(res, response);
+        });
+};
+
 module.exports.deleteChat = function deleteChat(req, res, next, chatId) {
   const userId = getUserIdFromToken(req, res);
   if (!userId) return;

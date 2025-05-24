@@ -32,3 +32,13 @@ module.exports.registerUser = function registerUser(req, res, next, body) {
             utils.writeJson(res, { message: error.message }, error.status || 500);
         });
 };
+
+module.exports.searchUsers = function searchUsers(req, res, next, name, limit) {
+    User.searchUsers(name, limit)
+        .then(function(response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function(error) {
+            utils.writeJson(res, { message: error.message }, error.status || 500);
+        });
+};

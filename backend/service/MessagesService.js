@@ -79,7 +79,6 @@ exports.getMessages = function(chatId, userId) {
           m.created_at as timestamp
          FROM messages m
          WHERE m.chat_id = $1
-         ORDER BY m.created_at DESC
          LIMIT 100`,
           [chatId]
       );

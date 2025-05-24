@@ -112,3 +112,24 @@ exports.logoutUser = function() {
     resolve();
   });
 }
+
+exports.searchUsers = async function(name, limit = 10) {
+  if (!name || name.trim().length === 0) {
+    throw { status: 400, message: 'Search name is required' };
+  }
+
+  try {
+    const result = await db.query(
+      'SELECT id, username FROM users WHERE username ILIKE $1 LIMIT $2',
+      [`%${name}%`, limit]
+    );
+
+    return result.rows.map(user => ({
+      id: user.id,
+      username: user.username
+    }));
+  } catch (err) {
+    console.error('Search users error:', err);
+    throw { status: 500, message: 'Internal server error' };
+  }
+};
