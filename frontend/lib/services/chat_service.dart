@@ -5,7 +5,6 @@ import 'auth_service.dart';
 class ChatService {
   static const String _baseUrl = 'http://10.0.2.2:8000';
 
-  // Получение всех чатов пользователя
   static Future<List<dynamic>> getUserChats({int limit = 20}) async {
     try {
       final token = await AuthService.getToken();
@@ -40,7 +39,6 @@ class ChatService {
     }
   }
 
-  // Создание нового чата
   static Future<Map<String, dynamic>> createChat(String name, List<String> participantIds) async {
     try {
       final token = await AuthService.getToken();
@@ -68,7 +66,6 @@ class ChatService {
     }
   }
 
-  // Удаление чата
   static Future<void> deleteChat(String chatId) async {
     try {
       final token = await AuthService.getToken();
@@ -93,17 +90,16 @@ class ChatService {
     }
   }
 
-  // Редактирование чата
   static Future<Map<String, dynamic>> editChat(String chatId, String name) async {
     try {
       final token = await AuthService.getToken();
-      
+
       if (token == null) {
         throw Exception('User is not authenticated');
       }
 
-      final response = await http.put(
-        Uri.parse('$_baseUrl/$chatId'),
+      final response = await http.patch(
+        Uri.parse('$_baseUrl/chats/$chatId'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -116,14 +112,13 @@ class ChatService {
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else {
-        throw Exception('Failed to edit chat');
+        throw Exception('Failed to edit chat: ${response.body}');
       }
     } catch (e) {
       throw Exception('Error editing chat: $e');
     }
   }
 
-  // Добавление участника в чат
   static Future<void> addParticipant(String chatId, String userId) async {
     try {
       final token = await AuthService.getToken();
@@ -151,7 +146,6 @@ class ChatService {
     }
   }
 
-  // Удаление участника из чата
   static Future<void> removeParticipant(String chatId, String userId) async {
     try {
       final token = await AuthService.getToken();
@@ -173,6 +167,39 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error removing participant: $e');
+    }
+  }
+
+  static Future<List<dynamic>> getParticipants(String chatId) async {
+    try {
+      final token = await AuthService.getToken();
+
+      if (token == null) {
+        throw Exception('User is not authenticated');
+      }
+
+      final response = await http.get(
+        Uri.parse('$_baseUrl/chats/$chatId/participants'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data is List) {
+          return data;
+        } else if (data is Map && data.containsKey('participants')) {
+          return data['participants'] ?? [];
+        } else {
+          return [];
+        }
+      } else {
+        throw Exception('Failed to load participants: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error loading participants: $e');
     }
   }
 } 

@@ -5,7 +5,6 @@ import 'auth_service.dart';
 class MessageService {
   static const String _baseUrl = 'http://10.0.2.2:8000';
 
-  // Получить сообщения чата
   static Future<List<dynamic>> getMessages(String chatId) async {
     try {
       final token = await AuthService.getToken();
@@ -30,7 +29,6 @@ class MessageService {
     }
   }
 
-  // Отправить сообщение
   static Future<void> sendMessage(String chatId, String content) async {
     try {
       final token = await AuthService.getToken();
@@ -51,7 +49,6 @@ class MessageService {
     }
   }
 
-  // Удалить сообщение
   static Future<void> deleteMessage(String chatId, String messageId) async {
     try {
       final token = await AuthService.getToken();
@@ -64,19 +61,18 @@ class MessageService {
         },
       );
       if (response.statusCode != 200) {
-        throw Exception('Failed to delete message');
+        throw Exception('Failed to delete message: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Error deleting message: $e');
     }
   }
 
-  // Редактировать сообщение
   static Future<void> editMessage(String chatId, String messageId, String content) async {
     try {
       final token = await AuthService.getToken();
       if (token == null) throw Exception('User is not authenticated');
-      final response = await http.put(
+      final response = await http.patch(
         Uri.parse('$_baseUrl/chats/$chatId/messages/$messageId'),
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +81,7 @@ class MessageService {
         body: jsonEncode({'content': content}),
       );
       if (response.statusCode != 200) {
-        throw Exception('Failed to edit message');
+        throw Exception('Failed to edit message: ${response.statusCode}. Response body: ${response.body}');
       }
     } catch (e) {
       throw Exception('Error editing message: $e');

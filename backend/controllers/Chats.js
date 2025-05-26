@@ -116,3 +116,16 @@ module.exports.editChat = function editChat(req, res, next, body, chatId) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.updateChat = function updateChat(req, res, next, body, chatId) {
+  const userId = getUserIdFromToken(req, res);
+  if (!userId) return;
+  
+  Chats.editChat(chatId, userId, body)
+    .then(function(response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function(response) {
+      utils.writeJson(res, response);
+    });
+};

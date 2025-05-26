@@ -36,7 +36,6 @@ class _AuthPageState extends State<AuthPage> {
         _passwordController.text,
       );
 
-      // Загружаем чаты пользователя
       final chats = await ChatService.getUserChats();
 
       final prefs = await SharedPreferences.getInstance();
@@ -97,14 +96,12 @@ class _AuthPageState extends State<AuthPage> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              // Красивый логотип или иконка
               const Icon(
                 Icons.account_circle,
                 size: 100,
                 color: Colors.blueAccent,
               ),
               const SizedBox(height: 30),
-              // Подзаголовок с анимацией
               const Text(
                 'Добро пожаловать!',
                 style: TextStyle(

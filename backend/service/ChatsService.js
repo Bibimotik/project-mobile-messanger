@@ -295,55 +295,58 @@ exports.deleteChat = function(chatId, userId) {
 };
 
 module.exports.editChat = function(chatId, userId, updateData) {
-  return new Promise(function(resolve, reject) {
-    // Проверяем, является ли пользователь владельцем чата
-    db.query(
-      'SELECT * FROM chats WHERE id = ? AND user_id = ?',
-      [chatId, userId],
-      function(error, results) {
-        if (error) {
-          reject({ status: 500, message: 'Database error', error: error });
-          return;
-        }
-
-        if (results.length === 0) {
-          reject({ status: 403, message: 'You are not authorized to edit this chat' });
-          return;
-        }
-
-        // Обновляем данные чата
-        const allowedFields = ['name', 'description', 'avatar_url'];
-        const updates = [];
-        const values = [];
-
-        for (const field of allowedFields) {
-          if (updateData[field] !== undefined) {
-            updates.push(`${field} = ?`);
-            values.push(updateData[field]);
-          }
-        }
-
-        if (updates.length === 0) {
-          reject({ status: 400, message: 'No valid fields to update' });
-          return;
-        }
-
-        values.push(chatId);
-
-        db.query(
-          `UPDATE chats SET ${updates.join(', ')} WHERE id = ?`,
-          values,
-          function(error, results) {
-            if (error) {
-              reject({ status: 500, message: 'Database error', error: error });
-              return;
-            }
-
-            resolve({ status: 200, message: 'Chat updated successfully' });
-          }
-        );
+  return new Promise(async function(resolve, reject) {
+    try {
+      if (!isValidUUID(chatId) || !isValidUUID(userId)) {
+        reject({ status: 400, message: 'Invalid ID format' });
+        return;
       }
-    );
+
+      // Check if user is a participant of the chat
+      const isParticipant = await db.query(
+        'SELECT id FROM chat_participants WHERE chat_id = $1 AND user_id = $2',
+        [chatId, userId]
+      );
+
+      if (isParticipant.rows.length === 0) {
+        reject({ status: 403, message: 'User is not a participant of this chat' });
+        return;
+      }
+
+      // Check if chat exists
+      const chatExists = await db.query(
+        'SELECT id FROM chats WHERE id = $1',
+        [chatId]
+      );
+
+      if (chatExists.rows.length === 0) {
+        reject({ status: 404, message: 'Chat not found' });
+        return;
+      }
+
+      // Update chat name
+      if (!updateData.name) {
+        reject({ status: 400, message: 'Chat name is required' });
+        return;
+      }
+
+      const result = await db.query(
+        'UPDATE chats SET name = $1 WHERE id = $2 RETURNING id, name, created_at',
+        [updateData.name, chatId]
+      );
+
+      resolve({
+        status: 200,
+        message: 'Chat updated successfully',
+        data: {
+          id: result.rows[0].id,
+          name: result.rows[0].name,
+          createdAt: result.rows[0].created_at
+        }
+      });
+    } catch (err) {
+      reject({ status: 500, message: err.message });
+    }
   });
 };
 

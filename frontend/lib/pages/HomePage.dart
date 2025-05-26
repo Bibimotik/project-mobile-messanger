@@ -168,10 +168,14 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         subtitle: Text(
-                          'Участников: ${chat['participants']?.length ?? 0}',
+                          chat is Map && chat.containsKey('lastMessage') && chat['lastMessage'] is String && chat['lastMessage'].isNotEmpty
+                              ? chat['lastMessage'] as String
+                              : 'Нет сообщений',
                           style: const TextStyle(
                             color: Colors.grey,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         onTap: () async {
                           final result = await Navigator.push(
