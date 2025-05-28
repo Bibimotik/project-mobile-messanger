@@ -1,0 +1,1 @@
+Get-Content backend/certs/personal.key, backend/certs/server.crt | Set-Content backend/certs/server.pem

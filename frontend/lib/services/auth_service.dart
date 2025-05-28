@@ -1,25 +1,35 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:io';
+import 'package:http/io_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../assets/native/calculateHashDart.dart';
 
+Future<http.Client> createSslClient() async {
+  HttpClient client = HttpClient(context: SecurityContext.defaultContext);
+  client.badCertificateCallback =
+  ((X509Certificate cert, String host, int port) => true);
+
+  return IOClient(client);
+}
+
 class AuthService {
-  static const String _baseUrl = 'http://10.0.2.2:8000/user';
-
-
+  static const String _baseUrl = 'https://10.0.2.2:443/user';
 
   static Future<Map<String, dynamic>> register(
       String username, String password) async {
+    http.Client? client;
     try {
       final int hash = await calculateHashDart(password);
       final String hashedPassword = hash.toString();
 
-      final response = await http.post(
+      client = await createSslClient();
+      final response = await client.post(
         Uri.parse('$_baseUrl/register'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'username': username,
-           'password': hashedPassword,
+          'password': hashedPassword,
           //'password': password,
         }),
       );
@@ -33,21 +43,25 @@ class AuthService {
       }
     } catch (e) {
       throw Exception('Registration error: $e');
+    } finally {
+      client?.close();
     }
   }
 
   static Future<Map<String, dynamic>> login(
       String username, String password) async {
+    http.Client? client;
     try {
       final int hash = await calculateHashDart(password);
       final String hashedPassword = hash.toString();
 
-      final response = await http.post(
+      client = await createSslClient();
+      final response = await client.post(
         Uri.parse('$_baseUrl/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'username': username,
-           'password': hashedPassword,
+          'password': hashedPassword,
           //'password': password,
         }),
       );
@@ -64,6 +78,8 @@ class AuthService {
       }
     } catch (e) {
       throw Exception('Login error: $e');
+    } finally {
+      client?.close();
     }
   }
 

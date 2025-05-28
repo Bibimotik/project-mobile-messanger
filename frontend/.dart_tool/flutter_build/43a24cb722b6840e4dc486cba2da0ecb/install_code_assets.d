@@ -1,1 +1,0 @@
- /Users/polinalazareva/project-mobile-messanger/frontend/.dart_tool/flutter_build/43a24cb722b6840e4dc486cba2da0ecb/native_assets.json: 

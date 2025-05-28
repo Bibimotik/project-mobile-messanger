@@ -1,2 +1,0 @@
-ninja: Entering directory `/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/30534a5t/arm64-v8a'
-ninja: no work to do.

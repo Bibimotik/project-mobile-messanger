@@ -21,7 +21,7 @@ services:
       DATABASE_PASSWORD: mysecretpassword
       DATABASE_NAME: mydatabase
       APP_PORT: 8080
-      JWT_SECRET: "460497564ebd6fa22aef662aa4f90405069bc8a3ce2e233d8a0109bf9f6e64737febac185b1e1d3d3e0020fd945f832cdd0a731dfe56ad25f773cdead2e49924"
+      JWT_SECRET: "460497564ebd6fa22aef662aa4f90405069bc8a3ce2e233d3d3e0020fd945f832cdd0a731dfe56ad25f773cdead2e49924"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 10s
@@ -49,7 +49,7 @@ services:
       DATABASE_PASSWORD: mysecretpassword
       DATABASE_NAME: mydatabase
       APP_PORT: 8080
-      JWT_SECRET: "460497564ebd6fa22aef662aa4f90405069bc8a3ce2e233d8a0109bf9f6e64737febac185b1e1d3d3e0020fd945f832cdd0a731dfe56ad25f773cdead2e49924"
+      JWT_SECRET: "460497564ebd6fa22aef662aa4f90405069bc8a3ce2e233d3d3e0020fd945f832cdd0a731dfe56ad25f773cdead2e49924"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 10s
@@ -85,10 +85,11 @@ services:
       - app_net
     image: haproxy
     ports:
-      - "8000:6000"
+      - "443:443"
     user: "root"
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ./certs/server.pem:/usr/local/etc/haproxy/certs/server.pem:rw
     depends_on:
       app1:
         condition: service_started

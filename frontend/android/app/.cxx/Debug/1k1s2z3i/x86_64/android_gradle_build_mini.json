@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "D:\\bpms\\frontend\\android\\app\\src\\main\\cpp\\hash\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:\\Users\\Lera\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+      "-C",
+      "D:\\bpms\\frontend\\android\\app\\.cxx\\Debug\\1k1s2z3i\\x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "C:\\Users\\Lera\\AppData\\Local\\Android\\sdk\\cmake\\3.22.1\\bin\\ninja.exe",
+    "-C",
+    "D:\\bpms\\frontend\\android\\app\\.cxx\\Debug\\1k1s2z3i\\x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "hash::@6890427a1f51a3e7e1df": {
+      "artifactName": "hash",
+      "abi": "x86_64",
+      "output": "D:\\bpms\\frontend\\build\\app\\intermediates\\cxx\\Debug\\1k1s2z3i\\obj\\x86_64\\libhash.so",
+      "runtimeFiles": []
+    }
+  }
+}

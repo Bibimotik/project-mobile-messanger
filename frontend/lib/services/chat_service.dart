@@ -1,11 +1,22 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'auth_service.dart';
+import 'package:http/io_client.dart';
+
+Future<http.Client> createSslClient() async {
+  HttpClient client = HttpClient(context: SecurityContext.defaultContext);
+  client.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+
+  return IOClient(client);
+}
 
 class ChatService {
-  static const String _baseUrl = 'http://10.0.2.2:8000';
+  static const String _baseUrl = 'https://10.0.2.2:443';
 
   static Future<List<dynamic>> getUserChats({int limit = 20}) async {
+    http.Client? client;
     try {
       final token = await AuthService.getToken();
       final userId = await AuthService.getUserId();
@@ -14,7 +25,8 @@ class ChatService {
         throw Exception('User is not authenticated');
       }
 
-      final response = await http.get(
+      client = await createSslClient();
+      final response = await client.get(
         Uri.parse('$_baseUrl/users/$userId/chats?limit=$limit'),
         headers: {
           'Content-Type': 'application/json',
@@ -36,16 +48,20 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error loading chats: $e');
+    } finally {
+      client?.close();
     }
   }
 
   static Future<Map<String, dynamic>> createChat(String name, List<String> participantIds) async {
+    http.Client? client;
     try {
       final token = await AuthService.getToken();
       if (token == null) {
         throw Exception('User is not authenticated');
       }
-      final response = await http.post(
+      client = await createSslClient();
+      final response = await client.post(
         Uri.parse('$_baseUrl/chats'),
         headers: {
           'Content-Type': 'application/json',
@@ -63,10 +79,13 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error creating chat: $e');
+    } finally {
+      client?.close();
     }
   }
 
   static Future<void> deleteChat(String chatId) async {
+    http.Client? client;
     try {
       final token = await AuthService.getToken();
       
@@ -74,7 +93,8 @@ class ChatService {
         throw Exception('User is not authenticated');
       }
 
-      final response = await http.delete(
+      client = await createSslClient();
+      final response = await client.delete(
         Uri.parse('$_baseUrl/chats/$chatId'),
         headers: {
           'Content-Type': 'application/json',
@@ -87,10 +107,13 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error deleting chat: $e');
+    } finally {
+      client?.close();
     }
   }
 
   static Future<Map<String, dynamic>> editChat(String chatId, String name) async {
+    http.Client? client;
     try {
       final token = await AuthService.getToken();
 
@@ -98,7 +121,8 @@ class ChatService {
         throw Exception('User is not authenticated');
       }
 
-      final response = await http.patch(
+      client = await createSslClient();
+      final response = await client.patch(
         Uri.parse('$_baseUrl/chats/$chatId'),
         headers: {
           'Content-Type': 'application/json',
@@ -116,10 +140,13 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error editing chat: $e');
+    } finally {
+      client?.close();
     }
   }
 
   static Future<void> addParticipant(String chatId, String userId) async {
+    http.Client? client;
     try {
       final token = await AuthService.getToken();
       
@@ -127,7 +154,8 @@ class ChatService {
         throw Exception('User is not authenticated');
       }
 
-      final response = await http.post(
+      client = await createSslClient();
+      final response = await client.post(
         Uri.parse('$_baseUrl/$chatId/participants'),
         headers: {
           'Content-Type': 'application/json',
@@ -143,10 +171,13 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error adding participant: $e');
+    } finally {
+      client?.close();
     }
   }
 
   static Future<void> removeParticipant(String chatId, String userId) async {
+    http.Client? client;
     try {
       final token = await AuthService.getToken();
       
@@ -154,7 +185,8 @@ class ChatService {
         throw Exception('User is not authenticated');
       }
 
-      final response = await http.delete(
+      client = await createSslClient();
+      final response = await client.delete(
         Uri.parse('$_baseUrl/$chatId/participants/$userId'),
         headers: {
           'Content-Type': 'application/json',
@@ -167,10 +199,13 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error removing participant: $e');
+    } finally {
+      client?.close();
     }
   }
 
   static Future<List<dynamic>> getParticipants(String chatId) async {
+    http.Client? client;
     try {
       final token = await AuthService.getToken();
 
@@ -178,7 +213,8 @@ class ChatService {
         throw Exception('User is not authenticated');
       }
 
-      final response = await http.get(
+      client = await createSslClient();
+      final response = await client.get(
         Uri.parse('$_baseUrl/chats/$chatId/participants'),
         headers: {
           'Content-Type': 'application/json',
@@ -200,6 +236,8 @@ class ChatService {
       }
     } catch (e) {
       throw Exception('Error loading participants: $e');
+    } finally {
+      client?.close();
     }
   }
 } 
