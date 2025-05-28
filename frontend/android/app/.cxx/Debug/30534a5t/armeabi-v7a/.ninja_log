@@ -1,5 +1,3 @@
 # ninja log v5
-136	269	1748372812486989162	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/armeabi-v7a/libhash.so	cb922a0ed8551701
-0	136	1748372812360260579	CMakeFiles/hash.dir/hash.c.o	c870f8d71c760aca
-1	162	1748373372356779029	CMakeFiles/hash.dir/hash.c.o	6e32a8572368d8ee
-162	288	1748373372481501301	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/armeabi-v7a/libhash.so	280e7a2202b27020
+0	264	1748457291741086252	CMakeFiles/hash.dir/hash.c.o	6e32a8572368d8ee
+265	489	1748457291963948765	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/armeabi-v7a/libhash.so	280e7a2202b27020

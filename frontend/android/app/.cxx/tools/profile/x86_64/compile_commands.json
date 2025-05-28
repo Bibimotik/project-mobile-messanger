@@ -1,7 +1,7 @@
 [
 {
-  "directory": "D:/bpms/frontend/android/app/.cxx/Debug/1k1s2z3i/x86_64",
-  "command": "C:\\Users\\Lera\\AppData\\Local\\Android\\Sdk\\ndk\\26.3.11579264\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=x86_64-none-linux-android21 --sysroot=C:/Users/Lera/AppData/Local/Android/Sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dhash_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -std=gnu11 -o CMakeFiles\\hash.dir\\hash.c.o -c D:\\bpms\\frontend\\android\\app\\src\\main\\cpp\\hash\\hash.c",
-  "file": "D:\\bpms\\frontend\\android\\app\\src\\main\\cpp\\hash\\hash.c"
+  "directory": "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/30534a5t/x86_64",
+  "command": "/Users/polinalazareva/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=x86_64-none-linux-android21 --sysroot=/Users/polinalazareva/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dhash_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fno-limit-debug-info  -fPIC -std=gnu11 -o CMakeFiles/hash.dir/hash.c.o -c /Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash/hash.c",
+  "file": "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash/hash.c"
 }
 ]
