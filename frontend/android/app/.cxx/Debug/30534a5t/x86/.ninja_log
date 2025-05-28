@@ -1,0 +1,5 @@
+# ninja log v5
+143	264	1748372812820187704	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/x86/libhash.so	c1fdd168d6061317
+0	143	1748372812687703478	CMakeFiles/hash.dir/hash.c.o	f7b3528b889f9f4f
+0	117	1748373372776821986	CMakeFiles/hash.dir/hash.c.o	9d2cedff9cfdedd6
+117	248	1748373372905038917	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/x86/libhash.so	7582cd42bdf686bc

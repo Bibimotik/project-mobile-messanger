@@ -1,43 +1,26 @@
 import 'dart:convert';
-import 'dart:ffi';
-import 'package:ffi/ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-// Подключение нативной библиотеки для хеширования
-// final DynamicLibrary nativeLib = DynamicLibrary.open('hash.dll');
-// typedef CalculateHashNative = Uint32 Function(Pointer<Utf8>);
-// typedef CalculateHash = int Function(Pointer<Utf8>);
-//
-// final CalculateHash _calculateHash = nativeLib
-//     .lookup<NativeFunction<CalculateHashNative>>('calculate_hash')
-//     .asFunction();
+import '../assets/native/calculateHashDart.dart';
 
 class AuthService {
   static const String _baseUrl = 'http://10.0.2.2:8000/user';
 
-  // Хеширование пароля через нативную библиотеку
-  // static String _hashPassword(String password) {
-  //   final pointer = password.toNativeUtf8();
-  //   try {
-  //     return _calculateHash(pointer).toString();
-  //   } finally {
-  //     malloc.free(pointer);
-  //   }
-  // }
+
 
   static Future<Map<String, dynamic>> register(
       String username, String password) async {
     try {
-      // final hashedPassword = _hashPassword(password);
+      final int hash = await calculateHashDart(password);
+      final String hashedPassword = hash.toString();
 
       final response = await http.post(
         Uri.parse('$_baseUrl/register'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'username': username,
-          // 'password': hashedPassword,
-          'password': password,
+           'password': hashedPassword,
+          //'password': password,
         }),
       );
 
@@ -56,15 +39,16 @@ class AuthService {
   static Future<Map<String, dynamic>> login(
       String username, String password) async {
     try {
-      // final hashedPassword = _hashPassword(password);
+      final int hash = await calculateHashDart(password);
+      final String hashedPassword = hash.toString();
 
       final response = await http.post(
         Uri.parse('$_baseUrl/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'username': username,
-          // 'password': hashedPassword,
-          'password': password,
+           'password': hashedPassword,
+          //'password': password,
         }),
       );
 

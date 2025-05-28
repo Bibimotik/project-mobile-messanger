@@ -1,0 +1,5 @@
+# ninja log v5
+989	1516	1748372812134607833	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/arm64-v8a/libhash.so	92814a5785c0f191
+7	989	1748372811615871643	CMakeFiles/hash.dir/hash.c.o	196774bd231655de
+31	1308	1748373371402819981	CMakeFiles/hash.dir/hash.c.o	c0c9a5de580ee17f
+1308	1759	1748373371855785906	/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/arm64-v8a/libhash.so	713710f68288781e

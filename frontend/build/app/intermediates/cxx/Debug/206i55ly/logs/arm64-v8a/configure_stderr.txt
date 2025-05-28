@@ -1,8 +1,0 @@
-CMake Error at CMakeLists.txt:7 (add_library):
-  add_library cannot create target "hash" because another target with the
-  same name already exists.  The existing target is a shared library created
-  in source directory
-  "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash".
-  See documentation for policy CMP0002 for more details.
-
-

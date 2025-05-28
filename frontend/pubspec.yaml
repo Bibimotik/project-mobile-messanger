@@ -62,7 +62,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - /Users/polinalazareva/project-mobile-messanger/frontend/lib/assets/native/hash.dll
+    - /Users/polinalazareva/project-mobile-messanger/frontend/lib/assets/native/libhash.so
+    - /Users/polinalazareva/project-mobile-messanger/frontend/lib/assets/native/libhash.dylib
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

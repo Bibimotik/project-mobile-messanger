@@ -130,7 +130,7 @@ class _AuthPageState extends State<AuthPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        prefixIcon: const Icon(Icons.email),
+                        prefixIcon: const Icon(Icons.person),
                         filled: true,
                         fillColor: Colors.grey[100],
                       ),

@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/src/main/cpp/hash/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/30534a5t/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/polinalazareva/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/polinalazareva/project-mobile-messanger/frontend/android/app/.cxx/Debug/30534a5t/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "hash::@6890427a1f51a3e7e1df": {
+      "artifactName": "hash",
+      "abi": "x86",
+      "output": "/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/x86/libhash.so",
+      "runtimeFiles": []
+    }
+  }
+}

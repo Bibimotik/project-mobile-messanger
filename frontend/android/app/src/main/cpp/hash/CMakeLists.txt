@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-# Добавляем исходные файлы
-add_library(hash SHARED
-            hash.c)
+add_library(hash SHARED hash.c)
 
-# Подключаем заголовочные файлы
-target_include_directories(hash PRIVATE
-                         ${CMAKE_CURRENT_SOURCE_DIR}) 
+find_library(log-lib log)
+
+target_link_libraries(hash
+        android
+        ${log-lib}
+)
+
+set_target_properties(hash PROPERTIES
+        C_STANDARD 11
+        C_STANDARD_REQUIRED ON
+)

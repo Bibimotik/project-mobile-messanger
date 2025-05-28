@@ -1,0 +1,1 @@
+/Users/polinalazareva/project-mobile-messanger/frontend/build/app/intermediates/cxx/Debug/30534a5t/obj/armeabi-v7a
