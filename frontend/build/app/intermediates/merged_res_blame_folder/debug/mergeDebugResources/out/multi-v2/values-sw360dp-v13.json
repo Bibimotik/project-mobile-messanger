@@ -4,7 +4,7 @@
             "outputFile": "com.example.mobile_messanger.app-mergeDebugResources-39:/values-sw360dp-v13/values-sw360dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/polinalazareva/.gradle/caches/8.10.2/transforms/12a085f4af97d8500c9432a48145ea1b/transformed/preference-1.2.1/res/values-sw360dp-v13/values-sw360dp-v13.xml",
+                    "source": "C:\\Users\\Lera\\.gradle\\caches\\8.10.2\\transforms\\0098a6e93522fecc805d8900172003dc\\transformed\\preference-1.2.1\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -6,6 +6,16 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../services/auth_service.dart';
+import 'dart:io';
+import 'package:http/io_client.dart';
+
+Future<http.Client> createSslClient() async {
+  HttpClient client = HttpClient(context: SecurityContext.defaultContext);
+  client.badCertificateCallback =
+      ((X509Certificate cert, String host, int port) => true);
+
+  return IOClient(client);
+}
 
 class ChatMessagesPage extends StatefulWidget {
   final String chatId;
@@ -151,8 +161,9 @@ class _ChatMessagesPageState extends State<ChatMessagesPage> {
       final prefs = await SharedPreferences.getInstance();
       final myUserId = prefs.getString('userId');
       final token = await AuthService.getToken();
-      final response = await http.delete(
-        Uri.parse('http://10.0.2.2:8000/chats/${widget.chatId}/participants?userId=$myUserId'),
+      final client = await createSslClient();
+      final response = await client.delete(
+        Uri.parse('https://10.0.2.2:443/chats/${widget.chatId}/participants?userId=$myUserId'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -499,8 +510,9 @@ class _AddParticipantDialogState extends State<AddParticipantDialog> {
     setState(() => _isLoading = true);
     try {
       final token = await AuthService.getToken();
-      final response = await http.post(
-        Uri.parse('http://10.0.2.2:8000/chats/${widget.chatId}/participants'),
+      final client = await createSslClient();
+      final response = await client.post(
+        Uri.parse('https://10.0.2.2:443/chats/${widget.chatId}/participants'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -558,8 +570,9 @@ class _AddParticipantDialogState extends State<AddParticipantDialog> {
     setState(() => _isLoading = true);
     try {
       final token = await AuthService.getToken();
-      final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/user/search?name=$query&limit=5'),
+      final client = await createSslClient();
+      final response = await client.get(
+        Uri.parse('https://10.0.2.2:443/user/search?name=$query&limit=5'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -654,8 +667,9 @@ class _RemoveParticipantDialogState extends State<RemoveParticipantDialog> {
     _myUserId = prefs.getString('userId');
     try {
       final token = await AuthService.getToken();
-      final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/chats/${widget.chatId}/participants'),
+      final client = await createSslClient();
+      final response = await client.get(
+        Uri.parse('https://10.0.2.2:443/chats/${widget.chatId}/participants'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -680,8 +694,9 @@ class _RemoveParticipantDialogState extends State<RemoveParticipantDialog> {
     setState(() => _isLoading = true);
     try {
       final token = await AuthService.getToken();
-      final response = await http.delete(
-        Uri.parse('http://10.0.2.2:8000/chats/${widget.chatId}/participants?userId=$userId'),
+      final client = await createSslClient();
+      final response = await client.delete(
+        Uri.parse('https://10.0.2.2:443/chats/${widget.chatId}/participants?userId=$userId'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
